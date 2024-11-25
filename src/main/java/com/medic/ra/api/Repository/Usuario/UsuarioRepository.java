@@ -1,4 +1,4 @@
-package com.medic.ra.api.Repository;
+package com.medic.ra.api.Repository.Usuario;
 
 
 import java.util.List;

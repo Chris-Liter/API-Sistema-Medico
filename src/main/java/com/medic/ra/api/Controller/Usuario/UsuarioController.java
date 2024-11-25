@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.medic.ra.api.Model.Usuario;
-import com.medic.ra.api.Repository.IUsuarioRepository;
+import com.medic.ra.api.Repository.Usuario.IUsuarioRepository;
 
 
 @Service
