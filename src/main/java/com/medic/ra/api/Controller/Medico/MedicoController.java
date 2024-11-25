@@ -41,8 +41,8 @@ public class MedicoController implements IMedicoController{
     }
 
     @Override
-    public CertificadoMedico emitirCertificados(Paciente paciente) {
-        CertificadoMedico certificado = null;
+    public List<CertificadoMedico> emitirCertificados(int paciente) {
+        List<CertificadoMedico> certificado = null;
         try {
             certificado = rep.emitirCertificados(paciente);
         } catch (Exception e) {

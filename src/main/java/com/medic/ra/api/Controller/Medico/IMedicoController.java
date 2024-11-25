@@ -11,6 +11,6 @@ import com.medic.ra.api.Model.Paciente;
 public interface IMedicoController {
     List<Cita> verAgenda(int id);
     void registrarConsulta(Paciente paciente, Consulta consulta);
-    CertificadoMedico emitirCertificados(Paciente paciente);
+    List<CertificadoMedico> emitirCertificados(int paciente);
     int crearMedico(Medico medico);
 }

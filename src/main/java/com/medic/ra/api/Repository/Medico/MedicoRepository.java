@@ -47,9 +47,9 @@ public class MedicoRepository implements IMedicoRepository{
     }
 
     @Override
-    public CertificadoMedico emitirCertificados(Paciente paciente) {
+    public List<CertificadoMedico> emitirCertificados(int paciente) {
         String sql = "SELECT * FROM certificadomedico where paciente_id = ?";
-        return jdbc.queryForObject(sql, new Object[]{paciente.getId()}, new BeanPropertyRowMapper<>(CertificadoMedico.class));
+        return jdbc.query(sql, new Object[]{paciente}, new BeanPropertyRowMapper<>(CertificadoMedico.class));
     }
 
     @Override

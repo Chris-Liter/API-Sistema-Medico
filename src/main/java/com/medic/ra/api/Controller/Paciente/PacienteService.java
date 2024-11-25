@@ -8,12 +8,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.medic.ra.api.Model.CertificadoMedico;
 import com.medic.ra.api.Model.Cita;
-import com.medic.ra.api.Model.Medico;
+import com.medic.ra.api.Model.ServiceResponse;
+
 
 
 
@@ -35,9 +38,19 @@ public class PacienteService {
     }
     
     @GetMapping("/certificado/{id}")
-    public ResponseEntity<CertificadoMedico> getMethodName(@PathVariable Medico id) {
+    public ResponseEntity<List<CertificadoMedico>> getMethodName(@PathVariable int id) {
         var result = controller.solicitarCertificado(id);
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+    
+    @PostMapping("/registrarcertificado")
+    public ResponseEntity<ServiceResponse> postMethodName(@RequestBody CertificadoMedico entity) {
+        ServiceResponse serv = new ServiceResponse();
+        int result = controller.crearCertificado(entity);
+        if(result == 1){
+            serv.setMessage("Item agregado");
+        }
+        return new ResponseEntity<>(serv, HttpStatus.OK);
     }
     
 

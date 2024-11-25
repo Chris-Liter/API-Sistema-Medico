@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.medic.ra.api.Model.CertificadoMedico;
 import com.medic.ra.api.Model.Cita;
-import com.medic.ra.api.Model.Medico;
 import com.medic.ra.api.Repository.Paciente.IPacienteRepository;
 
 @Service
@@ -30,14 +29,25 @@ public class PacienteController implements IPacienteController{
     }
 
     @Override
-    public CertificadoMedico solicitarCertificado(Medico medico) {
-        CertificadoMedico certificado = null;
+    public List<CertificadoMedico> solicitarCertificado(int medico) {
+        List<CertificadoMedico> certificado = null;
         try {
             certificado = rep.solicitarCertificado(medico);    
         } catch (Exception e) {
             throw e;
         }
         return certificado;
+    }
+
+    @Override
+    public int crearCertificado(CertificadoMedico medico) {
+        int row = 0;
+        try {
+            row = rep.crearCertificado(medico);
+        } catch (Exception e) {
+            throw e;
+        }
+        return row;
     }
     
 }

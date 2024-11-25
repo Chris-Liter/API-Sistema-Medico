@@ -43,7 +43,7 @@ public class MedicoService {
     
 
     @GetMapping("/certificado/{id}")
-    public ResponseEntity<CertificadoMedico> getMethodName(@PathVariable Paciente id) {
+    public ResponseEntity<List<CertificadoMedico>> getCertificado(@PathVariable int id) {
         var result = controller.emitirCertificados(id);
         System.out.println(result);
         return new ResponseEntity<>(result, HttpStatus.OK);
