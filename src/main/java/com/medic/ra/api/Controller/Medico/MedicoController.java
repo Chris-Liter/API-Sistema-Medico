@@ -10,6 +10,7 @@ import com.medic.ra.api.Model.Cita;
 import com.medic.ra.api.Model.Consulta;
 import com.medic.ra.api.Model.Medico;
 import com.medic.ra.api.Model.Paciente;
+import com.medic.ra.api.Model.Recordatorio;
 import com.medic.ra.api.Repository.Medico.IMedicoRepository;
 
 
@@ -56,6 +57,39 @@ public class MedicoController implements IMedicoController{
         int row =0;
         try {
             row = rep.crearMedico(medico);
+        } catch (Exception e) {
+            throw e;
+        }
+        return row;
+    }
+
+    @Override
+    public int crearPaciente(Paciente paciente) {
+        int row = 0;
+        try {
+            row = rep.crearPaciente(paciente);
+        } catch (Exception e) {
+            throw e;
+        }
+        return row;
+    }
+
+    @Override
+    public int crearRecordatorio(Recordatorio recordatorio) {
+        int row = 0;
+        try {
+            row = rep.crearRecordatorio(recordatorio);
+        } catch (Exception e) {
+            throw e;
+        }
+        return row;
+    }
+
+    @Override
+    public int crearCita(Cita cita) {
+        int row = 0;
+        try {
+            row = rep.crearCita(cita);
         } catch (Exception e) {
             throw e;
         }

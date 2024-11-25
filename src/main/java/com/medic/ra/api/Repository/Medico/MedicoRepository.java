@@ -13,6 +13,7 @@ import com.medic.ra.api.Model.Cita;
 import com.medic.ra.api.Model.Consulta;
 import com.medic.ra.api.Model.Medico;
 import com.medic.ra.api.Model.Paciente;
+import com.medic.ra.api.Model.Recordatorio;
 
 @Repository
 public class MedicoRepository implements IMedicoRepository{
@@ -40,9 +41,8 @@ public class MedicoRepository implements IMedicoRepository{
         List<Paciente> pacientes = jdbc.query(consultaP, new Object[]{paciente.getCedula()}, new BeanPropertyRowMapper<>(Paciente.class));
 
         for(Paciente pa: pacientes){
-            
-        String sql2 = "INSERT INTO consulta(fecha, detalles, signosvitales, paciente_id, medico_id) VALUES (?, ?, ?, ?, ?)";
-        jdbc.update(sql2, consulta.getFecha(), consulta.getDetalles(), consulta.getSignosVitales(), pa.getId(), consulta.getMedico_id());
+            String sql2 = "INSERT INTO consulta(fecha, detalles, signosvitales, paciente_id, medico_id) VALUES (?, ?, ?, ?, ?)";
+            jdbc.update(sql2, consulta.getFecha(), consulta.getDetalles(), consulta.getSignosVitales(), pa.getId(), consulta.getMedico_id());
         }
     }
 
@@ -55,14 +55,54 @@ public class MedicoRepository implements IMedicoRepository{
     @Override
     public int crearMedico(Medico medico) {
         String sql = "INSERT INTO medico(especialidad, usuario_id) VALUES (?, ?)";
-    try {
-        System.out.println("Usuario creado con éxito.");
-        return jdbc.update(sql, medico.getEspecialidad(), medico.getUsuario_id());
-        
-    } catch (DataAccessException e) {
-        System.err.println("Error al insertar el medico: " + e.getMessage());
+        try {
+            System.out.println("Usuario creado con éxito.");
+            return jdbc.update(sql, medico.getEspecialidad(), medico.getUsuario_id());
+            
+        } catch (DataAccessException e) {
+            System.err.println("Error al insertar el medico: " + e.getMessage());
+            return 0;
+        }
+    }
+
+
+    @Override
+    public int crearCita(Cita cita) {
+        String sql = "INSERT INTO cita(fecha, hora, estado, paciente_id, medico_id) VALUES (?, ?, ?, ?, ?)";
+        try {
+            System.out.println("Cita creada con éxito.");
+            return jdbc.update(sql, cita.getFecha(), cita.getHora(), cita.getHora(), cita.getPaciente_id(), cita.getMedico_id());
+            
+        } catch (DataAccessException e) {
+            System.err.println("Error al insertar el medico: " + e.getMessage());
+            return 0;
+        }
+    }
+
+    @Override
+    public int crearRecordatorio(Recordatorio recordatorio) {
+        String sql = "INSERT INTO recordatorio(fechaenvio, mensaje, cita_id) VALUES (?, ?, ?)";
+        try {
+            System.out.println("Recoratorio creado con éxito.");
+            return jdbc.update(sql, recordatorio.getFechaEnvio(), recordatorio.getMensaje(), recordatorio.getCita_id());
+            
+        } catch (DataAccessException e) {
+            System.err.println("Error al insertar el medico: " + e.getMessage());
+            return 0;
+        }
+    }
+
+    @Override
+    public int crearPaciente(Paciente paciente) {
+        String sql = "INSERT INTO paciente(nombre, apellido, cedula, telefono, direccion, correo, diagnostico) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String verificarCedula = "SELECT * FROM paciente where cedula = ?";
+        List<Paciente> ced = jdbc.query(verificarCedula, new Object[]{paciente.getCedula()}, new BeanPropertyRowMapper<>(Paciente.class));
+        if(ced.size() <= 0){
+            return jdbc.update(sql, paciente.getNombre(), paciente.getApellido(), paciente.getCedula(), paciente.getTelefono(), paciente.getDireccion(), paciente.getCorreo(), paciente.getDiagnostico());
+        }
         return 0;
     }
-    }
+
+    
     
 }

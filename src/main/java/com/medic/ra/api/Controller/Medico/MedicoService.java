@@ -19,6 +19,7 @@ import com.medic.ra.api.Model.Consulta;
 import com.medic.ra.api.Model.Medico;
 import com.medic.ra.api.Model.Paciente;
 import com.medic.ra.api.Model.PacienteConsulta;
+import com.medic.ra.api.Model.Recordatorio;
 import com.medic.ra.api.Model.ServiceResponse;
 
 
@@ -86,5 +87,34 @@ public class MedicoService {
         return new ResponseEntity<>(serv, HttpStatus.OK);
     }
     
+    @PostMapping("/crearcita")
+    public ResponseEntity<ServiceResponse> crearCita(@RequestBody Cita entity) {
+        ServiceResponse serv = new ServiceResponse();
+        int result = controller.crearCita(entity);
+        if(result == 1){
+            serv.setMessage("Item agregado");
+        } 
+        return new ResponseEntity<>(serv, HttpStatus.OK);
+    }
+
+    @PostMapping("/crearpaciente")
+    public ResponseEntity<ServiceResponse> crearPaciente(@RequestBody Paciente entity) {
+        ServiceResponse serv = new ServiceResponse();
+        int result = controller.crearPaciente(entity);
+        if(result == 1){
+            serv.setMessage("Item agregado");
+        } 
+        return new ResponseEntity<>(serv, HttpStatus.OK);
+    }
+
+    @PostMapping("/crearrecordatorio")
+    public ResponseEntity<ServiceResponse> crearRecordatorio(@RequestBody Recordatorio entity) {
+        ServiceResponse serv = new ServiceResponse();
+        int result = controller.crearRecordatorio(entity);
+        if(result == 1){
+            serv.setMessage("Item agregado");
+        } 
+        return new ResponseEntity<>(serv, HttpStatus.OK);
+    }
     
 }
