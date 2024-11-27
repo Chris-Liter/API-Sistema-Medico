@@ -2,6 +2,8 @@ package com.medic.ra.api.Model;
 
 
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,6 +21,10 @@ public class ReporteHistoriaClinica {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    //@OneToMany(mappedBy = "reporteHistoriaClinica")
+    private List<String> consultas;
+
+    private List<String> diagnosticosFrecuentes;
     private int paciente_id;
 
 

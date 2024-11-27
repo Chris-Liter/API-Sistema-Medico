@@ -24,6 +24,4 @@ public class Paciente {
     private String correo;
     private String diagnostico;
     
-
-    
 }

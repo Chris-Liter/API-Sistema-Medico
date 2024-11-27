@@ -18,7 +18,7 @@ public class PacienteRepository implements IPacienteRepository{
 
     @Override
     public List<Cita> verHistorialCitas(int id) {
-        String sql = "SELECT * FROM certificadomedico where paciente_id = ?";
+        String sql = "SELECT * FROM cita where paciente_id = ?";
         return jdbc.query(sql, new Object[]{id}, new BeanPropertyRowMapper<>(Cita.class));
     }
 

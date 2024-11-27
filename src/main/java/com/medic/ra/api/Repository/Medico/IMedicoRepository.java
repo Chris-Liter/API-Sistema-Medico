@@ -17,5 +17,7 @@ public interface IMedicoRepository {
     int crearMedico(Medico medico);
     int crearRecordatorio(Recordatorio recordatorio);
     int crearCita(Cita cita);
-
+    int cancelarCita(int id, Cita cita);
+    int confirmarCita(int id, Cita cita);
+    int enviarRecordatorio(Recordatorio recordatorio);
 }

@@ -20,8 +20,6 @@ import com.medic.ra.api.Model.ServiceResponse;
 
 
 
-
-
 @RestController
 @RequestMapping("api/paciente")
 @CrossOrigin("*")
@@ -31,7 +29,7 @@ public class PacienteService {
     private IPacienteController controller;
 
 
-    @GetMapping("/list/{id}")
+    @GetMapping("/historialCitas/{id}")
     public ResponseEntity<List<Cita>> getAll(@PathVariable int id) {
         var result = controller.verHistorialCitas(id);
         return new ResponseEntity<>(result, HttpStatus.OK);

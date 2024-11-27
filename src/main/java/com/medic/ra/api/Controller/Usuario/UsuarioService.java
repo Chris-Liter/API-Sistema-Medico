@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.medic.ra.api.Model.Consulta;
+import com.medic.ra.api.Model.Paciente;
+import com.medic.ra.api.Model.PacienteConsulta;
 import com.medic.ra.api.Model.ServiceResponse;
 import com.medic.ra.api.Model.Usuario;
 
@@ -38,7 +41,7 @@ public class UsuarioService {
     @PostMapping("/update")
     public ResponseEntity<ServiceResponse> update(@RequestBody Usuario usuario){
         ServiceResponse serv = new ServiceResponse();
-        int result = controller.update(usuario);
+        int result = controller.updateUsuario(usuario);
         if(result == 1){
             serv.setMessage("Item actualizado");
         }
@@ -65,13 +68,36 @@ public class UsuarioService {
     @DeleteMapping("delete/{id}")
     public ResponseEntity<ServiceResponse> delete(@PathVariable int id){
         ServiceResponse serv = new ServiceResponse();
-        int result = controller.delete(id);
+        int result = controller.deleteUsuario(id);
         if(result == 1){
             serv.setMessage("Item eliminado");
         }
         return new ResponseEntity<>(serv, HttpStatus.OK);
     }
 
+    @PostMapping("generarReporte")
+    public ResponseEntity<ServiceResponse> generarReporte(@RequestBody PacienteConsulta variable) {
+        ServiceResponse serv = new ServiceResponse();
+        Consulta consulta = new Consulta();        
+        consulta.setDetalles(variable.getDetalles());
+        consulta.setFecha(variable.getFecha());
+        consulta.setMedico_id(variable.getMedico_id());
+        consulta.setPaciente_id(variable.getPaciente_id());
+        consulta.setSignosVitales(variable.getSignosVitales());
+
+
+        Paciente paciente = new Paciente();
+        paciente.setId(variable.getPaciente_id());
+        paciente.setDiagnostico(variable.getDiagnostico());
+        System.out.println(variable.getPaciente_id());
+        System.out.println("entra en la generacion del reporte");
+        int result = controller.generarReporte(consulta, paciente);
+        if(result == 1){
+            serv.setMessage("Item generado");
+        }
+        return new ResponseEntity<>(serv, HttpStatus.OK);
+    }
+    
 
     
 }

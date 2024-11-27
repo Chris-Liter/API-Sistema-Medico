@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.medic.ra.api.Model.Consulta;
+import com.medic.ra.api.Model.Paciente;
 import com.medic.ra.api.Model.Usuario;
 import com.medic.ra.api.Repository.Usuario.IUsuarioRepository;
 
@@ -44,7 +46,7 @@ public class UsuarioController implements IUsuarioController{
     }
 
     @Override
-    public int delete(int id) {
+    public int deleteUsuario(int id) {
         int row;
         try{
             row = rep.delete(id);
@@ -66,10 +68,21 @@ public class UsuarioController implements IUsuarioController{
     }
 
     @Override
-    public int update(Usuario usuario) {
+    public int updateUsuario(Usuario usuario) {
         int row;
         try{
             row = rep.update(usuario);
+        }catch(Exception e){
+            throw e;
+        }
+        return row;
+    }
+
+    @Override
+    public int generarReporte(Consulta consulta, Paciente paciente) {
+        int row;
+        try{
+            row = rep.generarReporte(consulta, paciente);
         }catch(Exception e){
             throw e;
         }

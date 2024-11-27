@@ -26,5 +26,12 @@ public class Consulta {
 
     private int medico_id;
 
+    // @ManyToOne
+    // @JoinColumn(name = "reporte_historia_clinica_id") // Ajusta el nombre de la columna si es necesario
+    // private ReporteHistoriaClinica reporteHistoriaClinica;
 
+    public String getDiagnostico() {
+        return detalles;
+    }
+    
 }

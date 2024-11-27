@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,9 +22,6 @@ import com.medic.ra.api.Model.Paciente;
 import com.medic.ra.api.Model.PacienteConsulta;
 import com.medic.ra.api.Model.Recordatorio;
 import com.medic.ra.api.Model.ServiceResponse;
-
-
-
 
 
 
@@ -82,7 +80,7 @@ public class MedicoService {
         ServiceResponse serv = new ServiceResponse();
         int result = controller.crearMedico(entity);
         if(result == 1){
-            serv.setMessage("Item agregado");
+            serv.setMessage("Item creado");
         } 
         return new ResponseEntity<>(serv, HttpStatus.OK);
     }
@@ -90,9 +88,9 @@ public class MedicoService {
     @PostMapping("/crearcita")
     public ResponseEntity<ServiceResponse> crearCita(@RequestBody Cita entity) {
         ServiceResponse serv = new ServiceResponse();
-        int result = controller.crearCita(entity);
+        int result = controller.programarCita(entity);
         if(result == 1){
-            serv.setMessage("Item agregado");
+            serv.setMessage("Item creado");
         } 
         return new ResponseEntity<>(serv, HttpStatus.OK);
     }
@@ -102,7 +100,7 @@ public class MedicoService {
         ServiceResponse serv = new ServiceResponse();
         int result = controller.crearPaciente(entity);
         if(result == 1){
-            serv.setMessage("Item agregado");
+            serv.setMessage("Item creado");
         } 
         return new ResponseEntity<>(serv, HttpStatus.OK);
     }
@@ -112,9 +110,39 @@ public class MedicoService {
         ServiceResponse serv = new ServiceResponse();
         int result = controller.crearRecordatorio(entity);
         if(result == 1){
-            serv.setMessage("Item agregado");
+            serv.setMessage("Item creado");
         } 
         return new ResponseEntity<>(serv, HttpStatus.OK);
     }
+
+    @PutMapping("cancelarCita/{id}")
+    public ResponseEntity<ServiceResponse> cancelarCita(@PathVariable int id, @RequestBody Cita cita) {
+        ServiceResponse serv = new ServiceResponse();
+        int result = controller.cancelarCita(id, cita);
+        if(result == 1){
+            serv.setMessage("Item cancelado");
+        } 
+        return new ResponseEntity<>(serv, HttpStatus.OK);
+    }
+    @PutMapping("confirmarCita/{id}")
+    public ResponseEntity<ServiceResponse> confirmarCita(@PathVariable int id, @RequestBody Cita cita) {
+        ServiceResponse serv = new ServiceResponse();
+        int result = controller.confirmarCita(id, cita);
+        if(result == 1){
+            serv.setMessage("Item confirmado");
+        } 
+        return new ResponseEntity<>(serv, HttpStatus.OK);
+    }
+
+    @PostMapping("enviarRecordatorio")
+    public ResponseEntity<ServiceResponse> enviarRecordatorio(@RequestBody Recordatorio entity) {
+        ServiceResponse serv = new ServiceResponse();
+        int result = controller.enviarRecordatorio(entity);
+        if(result == 1){
+            serv.setMessage("Item enviado");
+        } 
+        return new ResponseEntity<>(serv, HttpStatus.OK);
+    }
+    
     
 }

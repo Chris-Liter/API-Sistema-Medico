@@ -9,4 +9,6 @@ public interface IPacienteController {
     List<Cita> verHistorialCitas(int id);
     List<CertificadoMedico> solicitarCertificado(int medico);
     int crearCertificado(CertificadoMedico medico);
+    
+    
 }

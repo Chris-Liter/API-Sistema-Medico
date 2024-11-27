@@ -86,10 +86,43 @@ public class MedicoController implements IMedicoController{
     }
 
     @Override
-    public int crearCita(Cita cita) {
+    public int programarCita(Cita cita) {
         int row = 0;
         try {
             row = rep.crearCita(cita);
+        } catch (Exception e) {
+            throw e;
+        }
+        return row;
+    }
+
+    @Override
+    public int cancelarCita(int id, Cita cita) {
+        int row = 0;
+        try {
+            row = rep.cancelarCita(id, cita);
+        } catch (Exception e) {
+            throw e;
+        }
+        return row;
+    }
+
+    @Override
+    public int confirmarCita(int id, Cita cita) {
+        int row = 0;
+        try {
+            row = rep.confirmarCita(id, cita);
+        } catch (Exception e) {
+            throw e;
+        }
+        return row;
+    }
+
+    @Override
+    public int enviarRecordatorio(Recordatorio recordatorio) {
+        int row = 0;
+        try {
+            row = rep.enviarRecordatorio(recordatorio);
         } catch (Exception e) {
             throw e;
         }

@@ -16,5 +16,8 @@ public interface IMedicoController {
     int crearPaciente(Paciente paciente);
     int crearMedico(Medico medico);
     int crearRecordatorio(Recordatorio recordatorio);
-    int crearCita(Cita cita);
+    int programarCita(Cita cita);
+    int cancelarCita(int id, Cita cita);
+    int confirmarCita(int id, Cita cita);
+    int enviarRecordatorio(Recordatorio recordatorio);
 }

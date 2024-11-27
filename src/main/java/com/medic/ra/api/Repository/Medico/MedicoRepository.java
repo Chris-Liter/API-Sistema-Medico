@@ -103,6 +103,43 @@ public class MedicoRepository implements IMedicoRepository{
         return 0;
     }
 
+    @Override
+    public int cancelarCita(int id, Cita cita) {
+        String sql = "UPDATE cita set fecha = ?, hora = ?, estado = ?, paciente_id = ?, medico = ? where id = ?";
+        try {
+            System.out.println("Cita creada con éxito.");
+            return jdbc.update(sql, cita.getFecha(), cita.getHora(), cita.getHora(), cita.getPaciente_id(), cita.getMedico_id(), id);
+            
+        } catch (DataAccessException e) {
+            System.err.println("Error al insertar el medico: " + e.getMessage());
+            return 0;
+        }
+    }
+
+    @Override
+    public int confirmarCita(int id, Cita cita) {
+        String sql = "UPDATE cita set fecha = ?, hora = ?, estado = ?, paciente_id = ?, medico = ? where id = ?";
+        try {
+            System.out.println("Cita creada con éxito.");
+            return jdbc.update(sql, cita.getFecha(), cita.getHora(), cita.getHora(), cita.getPaciente_id(), cita.getMedico_id(), id);
+            
+        } catch (DataAccessException e) {
+            System.err.println("Error al insertar el medico: " + e.getMessage());
+            return 0;
+        }
+    }
+
+    @Override
+    public int enviarRecordatorio(Recordatorio recordatorio) {
+        String sql = "INSERT INTO recordatorio(fechaenvio, mensaje, cita_id) VALUES (?, ?, ?)";
+        String verificarCedula = "SELECT * FROM recordatorio where id = ?";
+        List<Recordatorio> ced = jdbc.query(verificarCedula, new Object[]{recordatorio.getId()}, new BeanPropertyRowMapper<>(Recordatorio.class));
+        if(ced.size() <= 0){
+            return jdbc.update(sql, recordatorio.getFechaEnvio(), recordatorio.getMensaje(), recordatorio.getCita_id());
+        }
+        return 0;
+    }
+
     
     
 }
