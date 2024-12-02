@@ -6,6 +6,7 @@ Este proyecto es una API para la gestión de un sistema médico. Proporciona fun
 
 - Node.js
 - npm o yarn
+- Maven instalado en su PC
 
 ## 🚀 Instalación
 
@@ -30,7 +31,7 @@ Este proyecto es una API para la gestión de un sistema médico. Proporciona fun
 
 1. Crea un archivo `.env` en la raíz del proyecto y configura las variables de entorno necesarias:
     ```env
-    PORT=3000
+    PORT=8080
     ```
 
 ## ▶️ Uso
@@ -39,7 +40,7 @@ Este proyecto es una API para la gestión de un sistema médico. Proporciona fun
     ```bash
     mvn spring-boot:run
     ```
-2. La API estará disponible en `http://localhost:3000`.
+2. La API estará disponible en `http://localhost:8080`.
 
 ## 📚 Endpoints
 
@@ -49,3 +50,4 @@ Este proyecto es una API para la gestión de un sistema médico. Proporciona fun
 - `POST /doctores`: Crea un nuevo doctor.
 - `GET /citas`: Obtiene la lista de citas.
 - `POST /citas`: Crea una nueva cita.
+
