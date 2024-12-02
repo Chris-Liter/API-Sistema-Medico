@@ -37,11 +37,7 @@ Este proyecto es una API para la gestión de un sistema médico. Proporciona fun
 
 1. Inicia el servidor:
     ```bash
-    npm start
-    ```
-    o
-    ```bash
-    yarn start
+    mvn spring-boot:run
     ```
 2. La API estará disponible en `http://localhost:3000`.
 
